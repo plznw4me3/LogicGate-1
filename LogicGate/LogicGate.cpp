@@ -15,7 +15,7 @@
 #define new DEBUG_NEW
 #endif
 // 수정했습니다.
-
+//
 // CLogicGateApp
 
 BEGIN_MESSAGE_MAP(CLogicGateApp, CWinApp)
