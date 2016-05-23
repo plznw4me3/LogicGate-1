@@ -3,8 +3,9 @@
 //
 
 #pragma once
-
-
+#include <afxtempl.h>
+#include "Gate.h"
+#include "XOR.h"
 class CLogicGateView : public CView
 {
 protected: // create from serialization only
@@ -14,9 +15,16 @@ protected: // create from serialization only
 // Attributes
 public:
 	CLogicGateDoc* GetDocument() const;
-
+	int CLogicGateView::checkRect(CPoint point);
 // Operations
 public:
+	//test 용입니다//
+	XOR xor;
+	//test 용입니다//
+
+	CPoint pos;
+	CPoint	m_StartPos, m_EndPos;
+	bool m_StartToMove;
 
 // Overrides
 public:
@@ -37,10 +45,16 @@ protected:
 // Generated message map functions
 protected:
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
+	afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 };
 
 #ifndef _DEBUG  // debug version in LogicGateView.cpp
 inline CLogicGateDoc* CLogicGateView::GetDocument() const
    { return reinterpret_cast<CLogicGateDoc*>(m_pDocument); }
 #endif
+
 

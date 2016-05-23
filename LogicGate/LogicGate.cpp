@@ -6,11 +6,11 @@
 #include "afxwinappex.h"
 #include "afxdialogex.h"
 #include "LogicGate.h"
-#include "MainFrm.h"
+#include "MainFrm.h"1
 
 #include "LogicGateDoc.h"
 #include "LogicGateView.h"
-
+#include "Gate.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif

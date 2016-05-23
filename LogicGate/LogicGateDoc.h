@@ -12,11 +12,13 @@ protected: // create from serialization only
 	CLogicGateDoc();
 	DECLARE_DYNCREATE(CLogicGateDoc)
 
+
 // Attributes
 public:
 
 // Operations
 public:
+
 
 // Overrides
 public:
