@@ -194,7 +194,9 @@
     <ClInclude Include="LogicGateDoc.h" />
     <ClInclude Include="LogicGateView.h" />
     <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="NAND.h" />
     <ClInclude Include="NOR.h" />
+    <ClInclude Include="NOT.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -206,7 +208,9 @@
     <ClCompile Include="LogicGateDoc.cpp" />
     <ClCompile Include="LogicGateView.cpp" />
     <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="NAND.cpp" />
     <ClCompile Include="NOR.cpp" />
+    <ClCompile Include="NOT.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
