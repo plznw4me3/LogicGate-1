@@ -189,6 +189,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AND.h" />
     <ClInclude Include="Gate.h" />
     <ClInclude Include="LogicGate.h" />
     <ClInclude Include="LogicGateDoc.h" />
@@ -203,6 +204,7 @@
     <ClInclude Include="XOR.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AND.cpp" />
     <ClCompile Include="Gate.cpp" />
     <ClCompile Include="LogicGate.cpp" />
     <ClCompile Include="LogicGateDoc.cpp" />

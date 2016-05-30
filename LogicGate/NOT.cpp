@@ -50,7 +50,7 @@ bool NOT::makeOK(CArray<NotLogic, NotLogic&>& logic, CPoint point)
 	return permit;
 }
 
-/* NOT Logic 돌리기 */
+/* Logic 돌리기 */
 void NOT::rotateLogic(CArray<NotLogic, NotLogic&> &logic, CPoint point)
 {
 	int r_num[] = { 0, 1, 2, 3 };
