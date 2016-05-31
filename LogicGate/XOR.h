@@ -10,7 +10,6 @@ class XOR  : public Gate {
 private:
 	
 
-
 	CRect XORrect;
 	CRect inputRect, outputRect, input2Rect;
 	
@@ -32,7 +31,6 @@ public:
 	void SetPoint(int x, int y);
 	void DrawXOR(CDC *pDC, int x, int y);
 
-	bool clieckedCheck(CPoint point);
 	XOR();
 
 };

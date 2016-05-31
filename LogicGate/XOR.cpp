@@ -18,6 +18,7 @@ void XOR::SetPoint(int x, int y) {
 	locateX = x;
 	locateY = y;
 
+	//
 	//▼XOR이 그려지는 Rect 을 만듭니다. 
 	rect.SetRect(x, y, x + width, y + height);
 
