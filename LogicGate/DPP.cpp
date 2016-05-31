@@ -234,19 +234,23 @@ void DPP::setValue(CArray<DppLogic, DppLogic&>& logic, int input, POINT point)
 	}
 }
 
-/* output 반환 */
-int DPP::getValue(DppLogic & logic)
+/* output 계산 */
+void DPP::getValue(DppLogic & logic)
 {
 	if (logic.updown) {
-		if (logic.clk == 1)
-			logic.output = logic.input;
+		if (logic.clk == 1) {
+			if (logic.input == 1)
+				logic.output1 = 1;
+			else if (logic.input == 0)
+				logic.output1 = 0;
+		}
 	}
 	else {
-		if (logic.clk == 0)
-			logic.output = logic.input;
+		if (logic.clk == 0) {
+			if (logic.input == 1)
+				logic.output2 = 0;
+			else if (logic.input == 0)
+				logic.output2 = 1;
+		}
 	}
-
-	return logic.output;
 }
-
-
