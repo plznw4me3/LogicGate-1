@@ -190,6 +190,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AND.h" />
+    <ClInclude Include="DPP.h" />
     <ClInclude Include="Gate.h" />
     <ClInclude Include="Line.h" />
     <ClInclude Include="LogicGate.h" />
@@ -207,6 +208,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AND.cpp" />
+    <ClCompile Include="DPP.cpp" />
     <ClCompile Include="Gate.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="LogicGate.cpp" />
