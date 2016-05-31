@@ -190,6 +190,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Gate.h" />
+    <ClInclude Include="Line.h" />
     <ClInclude Include="LogicGate.h" />
     <ClInclude Include="LogicGateDoc.h" />
     <ClInclude Include="LogicGateView.h" />
@@ -198,10 +199,12 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Wire.h" />
     <ClInclude Include="XOR.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Gate.cpp" />
+    <ClCompile Include="Line.cpp" />
     <ClCompile Include="LogicGate.cpp" />
     <ClCompile Include="LogicGateDoc.cpp" />
     <ClCompile Include="LogicGateView.cpp" />
@@ -213,6 +216,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Wire.cpp" />
     <ClCompile Include="XOR.cpp" />
   </ItemGroup>
   <ItemGroup>

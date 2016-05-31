@@ -2,12 +2,11 @@
 #include "XOR.h"
 
 
+
 // #include "stdafx.h을 가장 윗줄에 넣어 주셔야 오류가 나지 않습니다.
 XOR::XOR() {
 	width = 60;
 	height = 60;
-	arr.SetSize(10);
-	arr.Add(pos);
 }
 
 void XOR::SetPoint(int x, int y) {
@@ -50,12 +49,10 @@ void XOR::SetPoint(int x, int y) {
 
 	pt2[0].SetPoint(x+10, y + 60);
 	pt2[1].SetPoint(x +10+ 20, y + 60);
-
-	
-	
+	input2Rect.SetRect(x + 10, (int)y + height*(0.75), x - 20, (int)y + height*(0.75) + THICK);
+	inputRect.SetRect(x + 10, (int)y + height*(0.25), x - 20, (int)y + height*(0.25) + THICK);
+	outputRect.SetRect(x + width, y + height*(0.5), x+width + 30, y + height*(0.5) + THICK);
 	//x~x+60 , y~y+60
-	
-
 	
 }
 CPoint* XOR::GetBezierPt() {
@@ -64,19 +61,28 @@ CPoint* XOR::GetBezierPt() {
 void XOR::DrawXOR(CDC *pDC, int x, int  y) {
 
 	SetPoint(x, y);
-
-	/*Test 용입니다*/
-	pDC->Rectangle(rect);
-	/*Test 용입니다*/
-
+	
 	pDC->PolyBezier(BezierPt, 4);
 	pDC->PolyBezier(BezierPt2, 4);
 	pDC->PolyBezier(BezierPt3, 4);
 	pDC->PolyBezier(BezierPt4, 4);
 	pDC->Polyline(pt, 2);
 	pDC->Polyline(pt2, 2);
-	
-	
+	pDC->Rectangle(inputRect);
+	pDC->Rectangle(input2Rect);
+	pDC->Rectangle(outputRect);
 }
 
 
+bool XOR::clieckedCheck(CPoint point) {
+	if (this->inputRect.PtInRect(point)) {
+		return true;
+	}
+	else if (this->input2Rect.PtInRect(point)) {
+		return true;
+	}
+	else if (this->outputRect.PtInRect(point)) {
+		return true;
+	}
+		return false;
+}

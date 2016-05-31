@@ -6,7 +6,7 @@
 #include "afxwinappex.h"
 #include "afxdialogex.h"
 #include "LogicGate.h"
-#include "MainFrm.h"1
+#include "MainFrm.h"
 
 #include "LogicGateDoc.h"
 #include "LogicGateView.h"

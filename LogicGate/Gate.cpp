@@ -49,22 +49,7 @@ bool Gate::Erase(CDC *dc , CRect rect) {
 
 //현재 연결된 선을 파악해 연결된 선은 굵어 집니다.
 
-long Gate::checkConecttedLine(Gate g , CPoint point) {
-	//출력은 늘 하나인걸로 10000
-	
-	int result = 0;
-	if (inputLine[0] == true) {
-		result + 1;
-		return result;}
-	if (inputLine[1] == true) {
-		return result + 10;
-		}
-	if (outputLine == true) {
-		result + 100000000;
-		return result;
-	}
-			return result;
-}
+
 
 CRect Gate::GetRect() {
 	return this->rect;
