@@ -4,12 +4,12 @@
 class NOT {
 public:
 	typedef struct NotLogic {
-		CPoint pos;
-		int rotate;
-		int input;
-		int output;
+		CPoint pos;		// Logic 위치
+		int rotate;		// 회전
+		int input;		// 입력
+		int output;		// 출력
 		CArray<POINT, POINT&> *in_line;
-		bool drawing;
+		bool drawing;	// 그리는 중인가?
 	};
 	CArray<NotLogic, NotLogic&> logic;
 

@@ -66,6 +66,9 @@
     <ClInclude Include="DPP.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TPP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LogicGate.cpp">
@@ -108,6 +111,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DPP.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TPP.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

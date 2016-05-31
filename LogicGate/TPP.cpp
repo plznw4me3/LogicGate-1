@@ -1,10 +1,10 @@
 #include "stdafx.h"
-#include "DPP.h"
+#include "TPP.h"
 
-/* DPP Logic 만들기 */
-void DPP::createLogic(CArray<DppLogic, DppLogic&> &logic, CPoint point)
+/* TPP Logic 만들기 */
+void TPP::createLogic(CArray<TppLogic, TppLogic&> &logic, CPoint point)
 {
-	DppLogic temp;
+	TppLogic temp;
 
 	if (logic.GetSize() == 0) {	// 처음 Logic 만들기
 		temp.pos = point;
@@ -39,7 +39,7 @@ void DPP::createLogic(CArray<DppLogic, DppLogic&> &logic, CPoint point)
 }
 
 /* 만들기 가능 유무 */
-bool DPP::makeOK(CArray<DppLogic, DppLogic&>& logic, CPoint point)
+bool TPP::makeOK(CArray<TppLogic, TppLogic&>& logic, CPoint point)
 {
 	bool permit = true;
 
@@ -56,8 +56,8 @@ bool DPP::makeOK(CArray<DppLogic, DppLogic&>& logic, CPoint point)
 	return permit;
 }
 
-/* DPP Logic 돌리기 */
-void DPP::rotateLogic(CArray<DppLogic, DppLogic&> &logic, CPoint point)
+/* TPP Logic 돌리기 */
+void TPP::rotateLogic(CArray<TppLogic, TppLogic&> &logic, CPoint point)
 {
 	int r_num[] = { 0, 1, 2, 3 };
 
@@ -93,7 +93,7 @@ void DPP::rotateLogic(CArray<DppLogic, DppLogic&> &logic, CPoint point)
 }
 
 /* Line 그리기 */
-void DPP::drawLine(CArray<DppLogic, DppLogic&> &logic, CPoint point, bool &flag)
+void TPP::drawLine(CArray<TppLogic, TppLogic&> &logic, CPoint point, bool &flag)
 {
 	for (int i = 0; i < logic.GetSize(); i++) {
 		POINT temp;
@@ -160,7 +160,7 @@ void DPP::drawLine(CArray<DppLogic, DppLogic&> &logic, CPoint point, bool &flag)
 }
 
 /* Logic 그리기 */
-void DPP::drawLogic(DppLogic & logic, POINT *pt)
+void TPP::drawLogic(TppLogic & logic, POINT *pt)
 {
 	int x = logic.pos.x;
 	int y = logic.pos.y;
@@ -225,7 +225,7 @@ void DPP::drawLogic(DppLogic & logic, POINT *pt)
 }
 
 /* input 입력 */
-void DPP::setValue(CArray<DppLogic, DppLogic&>& logic, int input, POINT point)
+void TPP::setValue(CArray<TppLogic, TppLogic&>& logic, int input, POINT point)
 {	// 해당 point값에 마지막 선이 연결된 경우 해당 input값 입력
 	for (int i = 0; i < logic.GetSize(); i++) {
 		CString x, y;
@@ -238,22 +238,28 @@ void DPP::setValue(CArray<DppLogic, DppLogic&>& logic, int input, POINT point)
 }
 
 /* output 계산 */
-void DPP::getValue(DppLogic & logic)
+void TPP::getValue(TppLogic & logic)
 {
 	if (logic.updown) {
 		if (logic.clk == 1) {
-			if (logic.input == 1)
-				logic.output1 = 1;
-			else if (logic.input == 0)
-				logic.output1 = 0;
+			if (logic.input == 1){
+				int temp;
+				temp = logic.output1;
+				logic.output1 = logic.output2;
+				logic.output2 = temp;
+			}
 		}
 	}
 	else {
 		if (logic.clk == 0) {
-			if (logic.input == 1)
-				logic.output2 = 0;
-			else if (logic.input == 0)
-				logic.output2 = 1;
+			if (logic.input == 1) {
+				int temp;
+				temp = logic.output1;
+				logic.output1 = logic.output2;
+				logic.output2 = temp;
+			}
 		}
 	}
 }
+
+

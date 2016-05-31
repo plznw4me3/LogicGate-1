@@ -4,14 +4,14 @@
 class AND {
 public:
 	typedef struct AndLogic {
-		CPoint pos;
-		int rotate;
-		int input1;
-		int input2;
-		int output;
+		CPoint pos;		// Logic 위치
+		int rotate;		// 회전
+		int input1;		// 입력1
+		int input2;		// 입력2
+		int output;		// 출력
 		CArray<POINT, POINT&> *in_line1;
 		CArray<POINT, POINT&> *in_line2;
-		bool drawing;
+		bool drawing;	// 그리는 중인가?
 	};
 	CArray<AndLogic, AndLogic&> logic;
 
