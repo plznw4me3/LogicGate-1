@@ -188,63 +188,72 @@ void NAND::drawLine(CArray<NAndLogic, NAndLogic&> &logic, CPoint point, bool &fl
 }
 
 /* Logic ±×¸®±â */
-void NAND::drawLogic(NAndLogic & logic, POINT * pt, POINT * pt_e, POINT *pt_b)
+void NAND::drawLogic(CArray<NAndLogic, NAndLogic&> &logic, CDC *dc)
 {
-	int x = logic.pos.x;
-	int y = logic.pos.y;
-	int r = logic.rotate;
+	for (int i = 0; i < logic.GetSize(); i++) {
+		POINT pt[4];
+		POINT pt_b[4];
+		POINT pt_e[2];
+		int x = logic[i].pos.x;
+		int y = logic[i].pos.y;
+		int r = logic[i].rotate;
 
-	switch (logic.rotate) {
-	case 0:
-		pt[0] = { x + 30, y };
-		pt[1] = { x, y };
-		pt[2] = { x, y + 60 };
-		pt[3] = { x + 30, y + 60 };
-		pt_b[0] = { x + 30, y };
-		pt_b[1] = { x + 50, y + 26 };
-		pt_b[2] = { x + 50, y + 36 };
-		pt_b[3] = { x + 30, y + 60 };
-		pt_e[0] = { x + 45, y + 26 };
-		pt_e[1] = { x + 55, y + 36 };
-		break;
-	case 1:
-		pt[0] = { x, y + 30 };
-		pt[1] = { x, y };
-		pt[2] = { x + 60, y };
-		pt[3] = { x + 60, y + 30 };
-		pt_b[0] = { x, y + 30 };
-		pt_b[1] = { x + 26, y + 50 };
-		pt_b[2] = { x + 36, y + 50 };
-		pt_b[3] = { x + 60, y + 30 };
-		pt_e[0] = { x + 26, y + 45 };
-		pt_e[1] = { x + 36, y + 55 };
-		break;
-	case 2:
-		pt[0] = { x + 30, y };
-		pt[1] = { x + 60, y };
-		pt[2] = { x + 60, y + 60 };
-		pt[3] = { x + 30, y + 60 };
-		pt_b[0] = { x + 30, y };
-		pt_b[1] = { x + 10, y + 26 };
-		pt_b[2] = { x + 10, y + 36 };
-		pt_b[3] = { x + 30, y + 60 };
-		pt_e[0] = { x + 5, y + 26 };
-		pt_e[1] = { x + 15, y + 36 };
-		break;
-	case 3:
-		pt[0] = { x, y + 30 };
-		pt[1] = { x, y + 60 };
-		pt[2] = { x + 60, y + 60 };
-		pt[3] = { x + 60, y + 30 };
-		pt_b[0] = { x, y + 30 };
-		pt_b[1] = { x + 26, y + 10 };
-		pt_b[2] = { x + 36, y + 10 };
-		pt_b[3] = { x + 60, y + 30 };
-		pt_e[0] = { x + 25, y + 5 };
-		pt_e[1] = { x + 36, y + 15 };
-		break;
-	default:
-		break;
+		switch (logic[i].rotate) {
+		case 0:
+			pt[0] = { x + 30, y };
+			pt[1] = { x, y };
+			pt[2] = { x, y + 60 };
+			pt[3] = { x + 30, y + 60 };
+			pt_b[0] = { x + 30, y };
+			pt_b[1] = { x + 50, y + 26 };
+			pt_b[2] = { x + 50, y + 36 };
+			pt_b[3] = { x + 30, y + 60 };
+			pt_e[0] = { x + 45, y + 26 };
+			pt_e[1] = { x + 55, y + 36 };
+			break;
+		case 1:
+			pt[0] = { x, y + 30 };
+			pt[1] = { x, y };
+			pt[2] = { x + 60, y };
+			pt[3] = { x + 60, y + 30 };
+			pt_b[0] = { x, y + 30 };
+			pt_b[1] = { x + 26, y + 50 };
+			pt_b[2] = { x + 36, y + 50 };
+			pt_b[3] = { x + 60, y + 30 };
+			pt_e[0] = { x + 26, y + 45 };
+			pt_e[1] = { x + 36, y + 55 };
+			break;
+		case 2:
+			pt[0] = { x + 30, y };
+			pt[1] = { x + 60, y };
+			pt[2] = { x + 60, y + 60 };
+			pt[3] = { x + 30, y + 60 };
+			pt_b[0] = { x + 30, y };
+			pt_b[1] = { x + 10, y + 26 };
+			pt_b[2] = { x + 10, y + 36 };
+			pt_b[3] = { x + 30, y + 60 };
+			pt_e[0] = { x + 5, y + 26 };
+			pt_e[1] = { x + 15, y + 36 };
+			break;
+		case 3:
+			pt[0] = { x, y + 30 };
+			pt[1] = { x, y + 60 };
+			pt[2] = { x + 60, y + 60 };
+			pt[3] = { x + 60, y + 30 };
+			pt_b[0] = { x, y + 30 };
+			pt_b[1] = { x + 26, y + 10 };
+			pt_b[2] = { x + 36, y + 10 };
+			pt_b[3] = { x + 60, y + 30 };
+			pt_e[0] = { x + 25, y + 5 };
+			pt_e[1] = { x + 36, y + 15 };
+			break;
+		default:
+			break;
+		}
+
+		dc->Polyline(pt, 4);
+		dc->PolyBezier(pt_b, 4);
+		dc->Ellipse(pt_e[0].x, pt_e[0].y, pt_e[1].x, pt_e[1].y);
 	}
 }
 

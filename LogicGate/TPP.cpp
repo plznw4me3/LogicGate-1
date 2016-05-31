@@ -160,67 +160,75 @@ void TPP::drawLine(CArray<TppLogic, TppLogic&> &logic, CPoint point, bool &flag)
 }
 
 /* Logic ±×¸®±â */
-void TPP::drawLogic(TppLogic & logic, POINT *pt)
+void TPP::drawLogic(CArray<TppLogic, TppLogic&> &logic, CDC *dc)
 {
-	int x = logic.pos.x;
-	int y = logic.pos.y;
-	int r = logic.rotate;
+	for (int i = 0; i < logic.GetSize(); i++) {
+		POINT pt[8];
+		int x = logic[i].pos.x;
+		int y = logic[i].pos.y;
+		int r = logic[i].rotate;
 
-	switch (logic.rotate) {
-	case 0:
-		pt[0] = { x, y + 35 };
-		pt[1] = { x + 10, y + 30 };
-		pt[2] = { x, y + 25 };
-		pt[3] = { x, y };
-		pt[4] = { x + 60, y };
-		pt[5] = { x + 60, y + 60 };
-		pt[6] = { x, y + 60 };
-		pt[7] = pt[2];
-		logic.ch_pos[0] = { x + 5, y + 5 };
-		logic.ch_pos[1] = { x + 40, y + 5 };
-		logic.ch_pos[2] = { x + 40, y + 40 };
-		break;
-	case 1:
-		pt[0] = { x + 25, y };
-		pt[1] = { x + 30, y + 10 };
-		pt[2] = { x + 35, y };
-		pt[3] = { x + 60, y };
-		pt[4] = { x + 60, y + 60 };
-		pt[5] = { x, y + 60 };
-		pt[6] = { x, y };
-		pt[7] = pt[2];
-		logic.ch_pos[0] = { x + 40, y + 5 };
-		logic.ch_pos[1] = { x + 40, y + 40 };
-		logic.ch_pos[2] = { x + 5, y + 40 };
-		break;
-	case 2:
-		pt[0] = { x + 60, y + 35 };
-		pt[1] = { x + 50, y + 30 };
-		pt[2] = { x + 60, y + 25 };
-		pt[3] = { x + 60, y };
-		pt[4] = { x, y };
-		pt[5] = { x, y + 60 };
-		pt[6] = { x + 60, y + 60 };
-		pt[7] = pt[2];
-		logic.ch_pos[0] = { x + 40, y + 5 };
-		logic.ch_pos[1] = { x + 5, y + 5 };
-		logic.ch_pos[2] = { x + 5, y + 40 };
-		break;
-	case 3:
-		pt[0] = { x + 25, y + 60 };
-		pt[1] = { x + 30, y + 50 };
-		pt[2] = { x + 35, y + 60 };
-		pt[3] = { x + 60, y + 60 };
-		pt[4] = { x + 60, y };
-		pt[5] = { x, y };
-		pt[6] = { x, y + 60 };
-		pt[7] = pt[2];
-		logic.ch_pos[0] = { x + 5, y + 40 };
-		logic.ch_pos[1] = { x + 5, y + 5 };
-		logic.ch_pos[2] = { x + 40, y + 5 };
-		break;
-	default:
-		break;
+		switch (logic[i].rotate) {
+		case 0:
+			pt[0] = { x, y + 35 };
+			pt[1] = { x + 10, y + 30 };
+			pt[2] = { x, y + 25 };
+			pt[3] = { x, y };
+			pt[4] = { x + 60, y };
+			pt[5] = { x + 60, y + 60 };
+			pt[6] = { x, y + 60 };
+			pt[7] = pt[2];
+			logic[i].ch_pos[0] = { x + 5, y + 5 };
+			logic[i].ch_pos[1] = { x + 40, y + 5 };
+			logic[i].ch_pos[2] = { x + 40, y + 40 };
+			break;
+		case 1:
+			pt[0] = { x + 25, y };
+			pt[1] = { x + 30, y + 10 };
+			pt[2] = { x + 35, y };
+			pt[3] = { x + 60, y };
+			pt[4] = { x + 60, y + 60 };
+			pt[5] = { x, y + 60 };
+			pt[6] = { x, y };
+			pt[7] = pt[2];
+			logic[i].ch_pos[0] = { x + 40, y + 5 };
+			logic[i].ch_pos[1] = { x + 40, y + 40 };
+			logic[i].ch_pos[2] = { x + 5, y + 40 };
+			break;
+		case 2:
+			pt[0] = { x + 60, y + 35 };
+			pt[1] = { x + 50, y + 30 };
+			pt[2] = { x + 60, y + 25 };
+			pt[3] = { x + 60, y };
+			pt[4] = { x, y };
+			pt[5] = { x, y + 60 };
+			pt[6] = { x + 60, y + 60 };
+			pt[7] = pt[2];
+			logic[i].ch_pos[0] = { x + 40, y + 5 };
+			logic[i].ch_pos[1] = { x + 5, y + 5 };
+			logic[i].ch_pos[2] = { x + 5, y + 40 };
+			break;
+		case 3:
+			pt[0] = { x + 25, y + 60 };
+			pt[1] = { x + 30, y + 50 };
+			pt[2] = { x + 35, y + 60 };
+			pt[3] = { x + 60, y + 60 };
+			pt[4] = { x + 60, y };
+			pt[5] = { x, y };
+			pt[6] = { x, y + 60 };
+			pt[7] = pt[2];
+			logic[i].ch_pos[0] = { x + 5, y + 40 };
+			logic[i].ch_pos[1] = { x + 5, y + 5 };
+			logic[i].ch_pos[2] = { x + 40, y + 5 };
+			break;
+		default:
+			break;
+		}
+
+		dc->Polyline(pt, 8);
+		dc->TextOutW(logic[i].ch_pos[0].x, logic[i].ch_pos[0].y, ch[0]);
+		dc->TextOutW(logic[i].ch_pos[1].x, logic[i].ch_pos[1].y, ch[1]);
+		dc->TextOutW(logic[i].ch_pos[2].x, logic[i].ch_pos[2].y, ch[2]);
 	}
 }
 
@@ -242,7 +250,7 @@ void TPP::getValue(TppLogic & logic)
 {
 	if (logic.updown) {
 		if (logic.clk == 1) {
-			if (logic.input == 1){
+			if (logic.input == 1) {
 				int temp;
 				temp = logic.output1;
 				logic.output1 = logic.output2;

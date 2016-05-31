@@ -150,44 +150,50 @@ void NOT::drawLine(CArray<NotLogic, NotLogic&> &logic, CPoint point, bool &flag)
 	}
 }
 
-/* Logic 그리기 */
-void NOT::drawLogic(NotLogic & logic, POINT *pt, POINT *pt_e)
-{
-	int x = logic.pos.x;
-	int y = logic.pos.y;
-	int r = logic.rotate;
+// Logic 그리기
+void NOT::drawLogic(CArray<NotLogic, NotLogic&>& logic, CDC * dc) {
+	for (int i = 0; i < logic.GetSize(); i++) {
+		POINT pt[3];
+		POINT pt_e[2];
+		int x = logic[i].pos.x;
+		int y = logic[i].pos.y;
+		int r = logic[i].rotate;
 
-	switch (logic.rotate) {
-	case 0:
-		pt[0] = { x, y };
-		pt[1] = { x + 30, y + 30 };
-		pt[2] = { x, y + 60 };
-		pt_e[0] = { x + 30, y + 26 };
-		pt_e[1] = { x + 40, y + 36 };
-		break;
-	case 1:
-		pt[0] = { x, y };
-		pt[1] = { x + 30, y + 30 };
-		pt[2] = { x + 60, y };
-		pt_e[0] = { x + 26, y + 30 };
-		pt_e[1] = { x + 36, y + 40 };
-		break;
-	case 2:
-		pt[0] = { x + 40, y };
-		pt[1] = { x + 10, y + 30 };
-		pt[2] = { x + 40, y + 60 };
-		pt_e[0] = { x, y + 26 };
-		pt_e[1] = { x + 10, y + 36 };
-		break;
-	case 3:
-		pt[0] = { x, y + 40 };
-		pt[1] = { x + 30, y + 10 };
-		pt[2] = { x + 60, y + 40 };
-		pt_e[0] = { x + 26, y };
-		pt_e[1] = { x + 36, y + 10 };
-		break;
-	default:
-		break;
+		switch (logic[i].rotate) {
+		case 0:
+			pt[0] = { x, y };
+			pt[1] = { x + 30, y + 30 };
+			pt[2] = { x, y + 60 };
+			pt_e[0] = { x + 30, y + 26 };
+			pt_e[1] = { x + 40, y + 36 };
+			break;
+		case 1:
+			pt[0] = { x, y };
+			pt[1] = { x + 30, y + 30 };
+			pt[2] = { x + 60, y };
+			pt_e[0] = { x + 26, y + 30 };
+			pt_e[1] = { x + 36, y + 40 };
+			break;
+		case 2:
+			pt[0] = { x + 40, y };
+			pt[1] = { x + 10, y + 30 };
+			pt[2] = { x + 40, y + 60 };
+			pt_e[0] = { x, y + 26 };
+			pt_e[1] = { x + 10, y + 36 };
+			break;
+		case 3:
+			pt[0] = { x, y + 40 };
+			pt[1] = { x + 30, y + 10 };
+			pt[2] = { x + 60, y + 40 };
+			pt_e[0] = { x + 26, y };
+			pt_e[1] = { x + 36, y + 10 };
+			break;
+		default:
+			break;
+		}
+
+		dc->Polygon(pt, 3);
+		dc->Ellipse(pt_e[0].x, pt_e[0].y, pt_e[1].x, pt_e[1].y);
 	}
 }
 

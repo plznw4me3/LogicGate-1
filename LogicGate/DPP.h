@@ -23,7 +23,7 @@ public:
 	bool makeOK(CArray<DppLogic, DppLogic&> &logic, CPoint point);	// 만들기 가능 유무
 	void rotateLogic(CArray<DppLogic, DppLogic&> &logic, CPoint poine);	// DPP Logic 돌리기
 	void drawLine(CArray<DppLogic, DppLogic&> &logic, CPoint point, bool &flag);	// 선 그리기
-	void drawLogic(DppLogic &logic, POINT *pt);	// Logic 그리기
+	void drawLogic(CArray<DppLogic, DppLogic&> &logic, CDC *dc);	// Logic 그리기
 	void setValue(CArray<DppLogic, DppLogic&> &logic, int input, POINT point);	// input 입력
 	void getValue(DppLogic &logic);	// output 계산
 };

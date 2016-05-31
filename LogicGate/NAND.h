@@ -20,7 +20,7 @@ public:
 	bool makeOK(CArray<NAndLogic, NAndLogic&> &logic, CPoint point);	// 만들기 가능 유무
 	void rotateLogic(CArray<NAndLogic, NAndLogic&> &logic, CPoint poine);	// NAND Logic 돌리기
 	void drawLine(CArray<NAndLogic, NAndLogic&> &logic, CPoint point, bool &flag);	// 선 그리기
-	void drawLogic(NAndLogic &logic, POINT *pt, POINT *pt_e, POINT *pt_b);	// Logic 그리기
+	void drawLogic(CArray<NAndLogic, NAndLogic&> &logic, CDC *dc);	// Logic 그리기
 	void setValue(CArray<NAndLogic, NAndLogic&> &logic, int input, POINT point);	// input 입력
 	int getValue(NAndLogic &logic);	// output 반환
 };

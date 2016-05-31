@@ -188,72 +188,64 @@ void OR::drawLine(CArray<OrLogic, OrLogic&> &logic, CPoint point, bool &flag)
 }
 
 /* Logic 그리기 */
-void OR::drawLogic(OrLogic & logic, POINT * pt, POINT *pt_lb, POINT *pt_rb)
+void OR::drawLogic(CArray<OrLogic, OrLogic&> &logic, CDC *dc)
 {
-	int x = logic.pos.x;
-	int y = logic.pos.y;
-	int r = logic.rotate;
+	for (int i = 0; i < logic.GetSize(); i++) {
+		POINT pt_lb[4];
+		POINT pt_rb[4];
+		int x = logic[i].pos.x;
+		int y = logic[i].pos.y;
+		int r = logic[i].rotate;
 
-	switch (logic.rotate) {
-	case 0:
-		pt[0] = { x + 30, y };
-		pt[1] = { x, y };
-		pt[2] = { x, y + 60 };
-		pt[3] = { x + 30, y + 60 };
-		pt_lb[0] = { x, y };
-		pt_lb[1] = { x + 20, y + 26 };
-		pt_lb[2] = { x + 20, y + 36 };
-		pt_lb[3] = { x, y + 60 };
-		pt_rb[0] = { x + 30, y };
-		pt_rb[1] = { x + 50, y + 26 };
-		pt_rb[2] = { x + 50, y + 36 };
-		pt_rb[3] = { x + 30, y + 60 };
-		break;
-	case 1:
-		pt[0] = { x, y + 30 };
-		pt[1] = { x, y };
-		pt[2] = { x + 60, y };
-		pt[3] = { x + 60, y + 30 };
-		pt_lb[0] = { x, y };
-		pt_lb[1] = { x + 26, y + 20 };
-		pt_lb[2] = { x + 36, y + 20 };
-		pt_lb[3] = { x + 60, y };
-		pt_rb[0] = { x, y + 30 };
-		pt_rb[1] = { x + 26, y + 50 };
-		pt_rb[2] = { x + 36, y + 50 };
-		pt_rb[3] = { x + 60, y + 30 };
-		break;
-	case 2:
-		pt[0] = { x + 30, y };
-		pt[1] = { x + 60, y };
-		pt[2] = { x + 60, y + 60 };
-		pt[3] = { x + 30, y + 60 };
-		pt_lb[0] = { x + 60, y };
-		pt_lb[1] = { x + 40, y + 26 };
-		pt_lb[2] = { x + 40, y + 36 };
-		pt_lb[3] = { x + 60, y + 60 };
-		pt_rb[0] = { x + 30, y };
-		pt_rb[1] = { x + 10, y + 26 };
-		pt_rb[2] = { x + 10, y + 36 };
-		pt_rb[3] = { x + 30, y + 60 };
-		break;
-	case 3:
-		pt[0] = { x, y + 30 };
-		pt[1] = { x, y + 60 };
-		pt[2] = { x + 60, y + 60 };
-		pt[3] = { x + 60, y + 30 };
-		pt_lb[0] = { x, y + 60 };
-		pt_lb[1] = { x + 26, y + 40 };
-		pt_lb[2] = { x + 36, y + 40 };
-		pt_lb[3] = { x + 60, y + 60 };
-		pt_rb[0] = { x, y + 30 };
-		pt_rb[1] = { x + 26, y + 10 };
-		pt_rb[2] = { x + 36, y + 10 };
-		pt_rb[3] = { x + 60, y + 30 };
-		break;
-	default:
-		break;
+		switch (logic[i].rotate) {
+		case 0:
+			pt_lb[0] = { x, y };
+			pt_lb[1] = { x + 10, y + 26 };
+			pt_lb[2] = { x + 10, y + 36 };
+			pt_lb[3] = { x, y + 60 };
+			pt_rb[0] = { x, y };
+			pt_rb[1] = { x + 50, y + 26 };
+			pt_rb[2] = { x + 50, y + 36 };
+			pt_rb[3] = { x, y + 60 };
+			break;
+		case 1:
+			pt_lb[0] = { x, y };
+			pt_lb[1] = { x + 26, y + 10 };
+			pt_lb[2] = { x + 36, y + 10 };
+			pt_lb[3] = { x + 60, y };
+			pt_rb[0] = { x, y };
+			pt_rb[1] = { x + 26, y + 50 };
+			pt_rb[2] = { x + 36, y + 50 };
+			pt_rb[3] = { x + 60, y };
+			break;
+		case 2:
+			pt_lb[0] = { x + 60, y };
+			pt_lb[1] = { x + 50, y + 26 };
+			pt_lb[2] = { x + 50, y + 36 };
+			pt_lb[3] = { x + 60, y + 60 };
+			pt_rb[0] = { x + 60, y };
+			pt_rb[1] = { x + 10, y + 26 };
+			pt_rb[2] = { x + 10, y + 36 };
+			pt_rb[3] = { x + 60, y + 60 };
+			break;
+		case 3:
+			pt_lb[0] = { x, y + 60 };
+			pt_lb[1] = { x + 26, y + 50 };
+			pt_lb[2] = { x + 36, y + 50 };
+			pt_lb[3] = { x + 60, y + 60 };
+			pt_rb[0] = { x, y + 60 };
+			pt_rb[1] = { x + 26, y + 10 };
+			pt_rb[2] = { x + 36, y + 10 };
+			pt_rb[3] = { x + 60, y + 60 };
+			break;
+		default:
+			break;
+		}
+
+		dc->PolyBezier(pt_lb, 4);
+		dc->PolyBezier(pt_rb, 4);
 	}
+
 }
 
 /* input 입력 */
