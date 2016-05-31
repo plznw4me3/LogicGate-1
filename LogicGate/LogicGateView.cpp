@@ -150,15 +150,7 @@ void CLogicGateView::OnMouseMove(UINT nFlags, CPoint point)
 	}
 
 //////////////////////////////////////////마우스를 움직여 선을 만듭니다 또는 연장하니다//////////////////////////
-	else if (arrline.GetAt(arrlineCount).makeLineFlag) {
-		arrline.GetAt(arrlineCount).EndPos = point;
-		if (xor.clieckedCheck(point)) {
-		
-		
-		}
-	
-		Invalidate();
-	}
+
 //////////////////////////////////////////와이어가 움직입니다 ./////////////////////////////////////
 	else if (lineMoveFlag) {
 		m_EndPos = point;

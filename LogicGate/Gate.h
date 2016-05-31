@@ -26,6 +26,7 @@ public:
 	long Gate::checkConecttedLine(Gate g, CPoint point);
 	bool Gate::Erase(CDC *dc, CRect rect);
 	bool Gate::Move(CPoint point, CDC *pdc);
+	
 	Gate();
 	~Gate();
 	

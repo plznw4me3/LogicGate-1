@@ -75,15 +75,3 @@ void XOR::DrawXOR(CDC *pDC, int x, int  y) {
 }
 
 
-bool XOR::clieckedCheck(CPoint point) {
-	if (this->inputRect.PtInRect(point)) {
-		return true;
-	}
-	else if (this->input2Rect.PtInRect(point)) {
-		return true;
-	}
-	else if (this->outputRect.PtInRect(point)) {
-		return true;
-	}
-		return false;
-}

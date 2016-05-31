@@ -45,13 +45,22 @@
     <ClInclude Include="Gate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NOR.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Line.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Wire.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AND.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NAND.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NOT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NOR.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -75,6 +84,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Gate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Line.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Wire.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AND.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NAND.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NOT.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="NOR.cpp">
