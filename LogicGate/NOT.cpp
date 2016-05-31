@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "NOT.h"
 
-/* NOT Logic 만들기 */
+/* Logic 만들기 */
 void NOT::createLogic(CArray<NotLogic, NotLogic&> &logic, CPoint point)
 {
 	NotLogic temp;
@@ -12,7 +12,6 @@ void NOT::createLogic(CArray<NotLogic, NotLogic&> &logic, CPoint point)
 		temp.output = 2;
 		temp.rotate = 0;
 		temp.in_line = new CArray<POINT, POINT&>;
-		temp.out_line = new CArray<POINT, POINT&>;
 		temp.drawing = false;
 
 		logic.Add(temp);
@@ -24,7 +23,6 @@ void NOT::createLogic(CArray<NotLogic, NotLogic&> &logic, CPoint point)
 			temp.output = 2;
 			temp.rotate = 0;
 			temp.in_line = new CArray<POINT, POINT&>;
-			temp.out_line = new CArray<POINT, POINT&>;
 			temp.drawing = false;
 
 			logic.Add(temp);
@@ -79,7 +77,6 @@ void NOT::rotateLogic(CArray<NotLogic, NotLogic&> &logic, CPoint point)
 			}
 			// 기존 정보 초기화
 			logic[i].in_line->RemoveAll();
-			logic[i].out_line->RemoveAll();
 			logic[i].input = 2;
 			logic[i].output = 2;
 		}

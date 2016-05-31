@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "AND.h"
 
-/* NOT Logic 만들기 */
+/* Logic 만들기 */
 void AND::createLogic(CArray<AndLogic, AndLogic&> &logic, CPoint point)
 {
 	AndLogic temp;
@@ -14,7 +14,6 @@ void AND::createLogic(CArray<AndLogic, AndLogic&> &logic, CPoint point)
 		temp.rotate = 0;
 		temp.in_line1 = new CArray<POINT, POINT&>;
 		temp.in_line2 = new CArray<POINT, POINT&>;
-		temp.out_line = new CArray<POINT, POINT&>;
 		temp.drawing = false;
 
 		logic.Add(temp);
@@ -28,7 +27,6 @@ void AND::createLogic(CArray<AndLogic, AndLogic&> &logic, CPoint point)
 			temp.rotate = 0;
 			temp.in_line1 = new CArray<POINT, POINT&>;
 			temp.in_line2 = new CArray<POINT, POINT&>;
-			temp.out_line = new CArray<POINT, POINT&>;
 			temp.drawing = false;
 
 			logic.Add(temp);
@@ -83,7 +81,6 @@ void AND::rotateLogic(CArray<AndLogic, AndLogic&> &logic, CPoint point)
 			}
 			logic[i].in_line1->RemoveAll();
 			logic[i].in_line2->RemoveAll();
-			logic[i].out_line->RemoveAll();
 			logic[i].input1 = 2;
 			logic[i].input2 = 2;
 			logic[i].output = 2;

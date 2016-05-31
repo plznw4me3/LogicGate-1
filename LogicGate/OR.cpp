@@ -1,10 +1,10 @@
 #include "stdafx.h"
-#include "NAND.h"
+#include "OR.h"
 
 /* Logic 만들기 */
-void NAND::createLogic(CArray<NAndLogic, NAndLogic&> &logic, CPoint point)
+void OR::createLogic(CArray<OrLogic, OrLogic&> &logic, CPoint point)
 {
-	NAndLogic temp;
+	OrLogic temp;
 
 	if (logic.GetSize() == 0) {	// 처음 Logic 만들기
 		temp.pos = point;
@@ -35,7 +35,7 @@ void NAND::createLogic(CArray<NAndLogic, NAndLogic&> &logic, CPoint point)
 }
 
 /* 만들기 가능 유무 */
-bool NAND::makeOK(CArray<NAndLogic, NAndLogic&> &logic, CPoint point)
+bool OR::makeOK(CArray<OrLogic, OrLogic&> &logic, CPoint point)
 {
 	bool permit = true;
 
@@ -53,7 +53,7 @@ bool NAND::makeOK(CArray<NAndLogic, NAndLogic&> &logic, CPoint point)
 }
 
 /* Logic 돌리기 */
-void NAND::rotateLogic(CArray<NAndLogic, NAndLogic&> &logic, CPoint point)
+void OR::rotateLogic(CArray<OrLogic, OrLogic&> &logic, CPoint point)
 {
 	int r_num[] = { 0, 1, 2, 3 };
 
@@ -89,7 +89,7 @@ void NAND::rotateLogic(CArray<NAndLogic, NAndLogic&> &logic, CPoint point)
 }
 
 /* Line 그리기 */
-void NAND::drawLine(CArray<NAndLogic, NAndLogic&> &logic, CPoint point, bool &flag)
+void OR::drawLine(CArray<OrLogic, OrLogic&> &logic, CPoint point, bool &flag)
 {
 	for (int i = 0; i < logic.GetSize(); i++) {
 		POINT temp;
@@ -112,20 +112,20 @@ void NAND::drawLine(CArray<NAndLogic, NAndLogic&> &logic, CPoint point, bool &fl
 				if (logic[i].input1 == 2) {
 					switch (r) {	// input1이 입력되지 않은 경우
 					case 0:
-						temp.x = x;
+						temp.x = x + 17;
 						temp.y = y + 10;
 						break;
 					case 1:
 						temp.x = x + 10;
-						temp.y = y;
+						temp.y = y + 17;
 						break;
 					case 2:
-						temp.x = x + 60;
+						temp.x = x + 43;
 						temp.y = y + 10;
 						break;
 					case 3:
 						temp.x = x + 10;
-						temp.y = y + 60;
+						temp.y = y + 43;
 						break;
 					default:
 						break;
@@ -135,20 +135,20 @@ void NAND::drawLine(CArray<NAndLogic, NAndLogic&> &logic, CPoint point, bool &fl
 				else if (logic[i].input2 == 2) {	// input1이 입력되고 input2가 입력되지 않은 경우
 					switch (r) {
 					case 0:
-						temp.x = x;
+						temp.x = x + 17;
 						temp.y = y + 50;
 						break;
 					case 1:
 						temp.x = x + 50;
-						temp.y = y;
+						temp.y = y + 17;
 						break;
 					case 2:
-						temp.x = x + 60;
+						temp.x = x + 43;
 						temp.y = y + 50;
 						break;
 					case 3:
 						temp.x = x + 50;
-						temp.y = y + 60;
+						temp.y = y + 43;
 						break;
 					default:
 						break;
@@ -188,7 +188,7 @@ void NAND::drawLine(CArray<NAndLogic, NAndLogic&> &logic, CPoint point, bool &fl
 }
 
 /* Logic 그리기 */
-void NAND::drawLogic(NAndLogic & logic, POINT * pt, POINT * pt_e, POINT *pt_b)
+void OR::drawLogic(OrLogic & logic, POINT * pt, POINT *pt_lb, POINT *pt_rb)
 {
 	int x = logic.pos.x;
 	int y = logic.pos.y;
@@ -200,48 +200,56 @@ void NAND::drawLogic(NAndLogic & logic, POINT * pt, POINT * pt_e, POINT *pt_b)
 		pt[1] = { x, y };
 		pt[2] = { x, y + 60 };
 		pt[3] = { x + 30, y + 60 };
-		pt_b[0] = { x + 30, y };
-		pt_b[1] = { x + 50, y + 26 };
-		pt_b[2] = { x + 50, y + 36 };
-		pt_b[3] = { x + 30, y + 60 };
-		pt_e[0] = { x + 45, y + 26 };
-		pt_e[1] = { x + 55, y + 36 };
+		pt_lb[0] = { x, y };
+		pt_lb[1] = { x + 20, y + 26 };
+		pt_lb[2] = { x + 20, y + 36 };
+		pt_lb[3] = { x, y + 60 };
+		pt_rb[0] = { x + 30, y };
+		pt_rb[1] = { x + 50, y + 26 };
+		pt_rb[2] = { x + 50, y + 36 };
+		pt_rb[3] = { x + 30, y + 60 };
 		break;
 	case 1:
 		pt[0] = { x, y + 30 };
 		pt[1] = { x, y };
 		pt[2] = { x + 60, y };
 		pt[3] = { x + 60, y + 30 };
-		pt_b[0] = { x, y + 30 };
-		pt_b[1] = { x + 26, y + 50 };
-		pt_b[2] = { x + 36, y + 50 };
-		pt_b[3] = { x + 60, y + 30 };
-		pt_e[0] = { x + 26, y + 45 };
-		pt_e[1] = { x + 36, y + 55 };
+		pt_lb[0] = { x, y };
+		pt_lb[1] = { x + 26, y + 20 };
+		pt_lb[2] = { x + 36, y + 20 };
+		pt_lb[3] = { x + 60, y };
+		pt_rb[0] = { x, y + 30 };
+		pt_rb[1] = { x + 26, y + 50 };
+		pt_rb[2] = { x + 36, y + 50 };
+		pt_rb[3] = { x + 60, y + 30 };
 		break;
 	case 2:
 		pt[0] = { x + 30, y };
 		pt[1] = { x + 60, y };
 		pt[2] = { x + 60, y + 60 };
 		pt[3] = { x + 30, y + 60 };
-		pt_b[0] = { x + 30, y };
-		pt_b[1] = { x + 10, y + 26 };
-		pt_b[2] = { x + 10, y + 36 };
-		pt_b[3] = { x + 30, y + 60 };
-		pt_e[0] = { x + 5, y + 26 };
-		pt_e[1] = { x + 15, y + 36 };
+		pt_lb[0] = { x + 60, y };
+		pt_lb[1] = { x + 40, y + 26 };
+		pt_lb[2] = { x + 40, y + 36 };
+		pt_lb[3] = { x + 60, y + 60 };
+		pt_rb[0] = { x + 30, y };
+		pt_rb[1] = { x + 10, y + 26 };
+		pt_rb[2] = { x + 10, y + 36 };
+		pt_rb[3] = { x + 30, y + 60 };
 		break;
 	case 3:
 		pt[0] = { x, y + 30 };
 		pt[1] = { x, y + 60 };
 		pt[2] = { x + 60, y + 60 };
 		pt[3] = { x + 60, y + 30 };
-		pt_b[0] = { x, y + 30 };
-		pt_b[1] = { x + 26, y + 10 };
-		pt_b[2] = { x + 36, y + 10 };
-		pt_b[3] = { x + 60, y + 30 };
-		pt_e[0] = { x + 25, y + 5 };
-		pt_e[1] = { x + 36, y + 15 };
+		pt_lb[0] = { x, y + 60 };
+		pt_lb[1] = { x + 26, y + 40 };
+		pt_lb[2] = { x + 36, y + 40 };
+		pt_lb[3] = { x + 60, y + 60 };
+		pt_rb[0] = { x, y + 30 };
+		pt_rb[1] = { x + 26, y + 10 };
+		pt_rb[2] = { x + 36, y + 10 };
+		pt_rb[3] = { x + 60, y + 30 };
 		break;
 	default:
 		break;
@@ -249,7 +257,7 @@ void NAND::drawLogic(NAndLogic & logic, POINT * pt, POINT * pt_e, POINT *pt_b)
 }
 
 /* input 입력 */
-void NAND::setValue(CArray<NAndLogic, NAndLogic&> &logic, int input, POINT point)
+void OR::setValue(CArray<OrLogic, OrLogic&> &logic, int input, POINT point)
 {	// 해당 point값에 마지막 선이 연결된 경우 해당 input값 입력
 	for (int i = 0; i < logic.GetSize(); i++) {
 		CString x1, y1, x2, y2;
@@ -268,12 +276,12 @@ void NAND::setValue(CArray<NAndLogic, NAndLogic&> &logic, int input, POINT point
 }
 
 /* output 반환 */
-int NAND::getValue(NAndLogic &logic)
+int OR::getValue(OrLogic &logic)
 {
-	if ((logic.input1 == 1) && (logic.input2 == 1))
-		logic.output = 0;
-	else
+	if ((logic.input1 == 1) || (logic.input2 == 1))
 		logic.output = 1;
+	else
+		logic.output = 0;
 
 	return logic.output;
 }

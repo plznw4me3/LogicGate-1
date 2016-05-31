@@ -3,7 +3,7 @@
 #include <afxtempl.h>
 #include "Gate.h"
 class XOR  : public Gate {
-
+	
 private:
 	CRect XORrect;
 	CPoint pos;

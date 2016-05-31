@@ -11,7 +11,6 @@ public:
 		int output;
 		CArray<POINT, POINT&> *in_line1;
 		CArray<POINT, POINT&> *in_line2;
-		CArray<POINT, POINT&> *out_line;
 		bool drawing;
 	};
 	CArray<NAndLogic, NAndLogic&> logic;

@@ -9,7 +9,6 @@ public:
 		int input;
 		int output;
 		CArray<POINT, POINT&> *in_line;
-		CArray<POINT, POINT&> *out_line;
 		bool drawing;
 	};
 	CArray<NotLogic, NotLogic&> logic;
