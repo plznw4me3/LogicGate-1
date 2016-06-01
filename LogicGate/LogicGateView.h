@@ -58,6 +58,9 @@ public:
 	bool eraseButtonClickedFlag;
 	CPoint mousePoint;
 
+public :
+	void DrawImage(CDC *dc);	/* 메모리 DC에 그리기 */
+
 //선을 저장하기 위한 member
 	Wire *wire;
 	CArray <Wire, Wire&> arrline;

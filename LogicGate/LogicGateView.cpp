@@ -86,10 +86,41 @@ void CLogicGateView::OnDraw(CDC* pDC)
 		arrline.GetAt(i).DrawLine(pDC);
 	}
 	*/
-	//CClientDC dc(this);
-	nand_logic.drawLogic(nand_logic.logic, pDC);
+	/* 더블 버퍼링 */
+	CDC *dc = GetDC();
+
+	CRect rect;
+	GetClientRect(&rect);
+
+	// 메모리 DC 선언
+	CDC memDC;
+	CBitmap *pOldBitmap, bitmap;
+
+	// 화면 DC와 호환되는 메모리 DC 객체를 생성
+	memDC.CreateCompatibleDC(dc);
+
+	// 마찬가지로 화면 DC와 호환되는 Bitmap 생성
+	bitmap.CreateCompatibleBitmap(dc, rect.Width(), rect.Height());
+
+	pOldBitmap = (CBitmap*)memDC.SelectObject(&bitmap);
+	memDC.PatBlt(0, 0, rect.Width(), rect.Height(), WHITENESS);	// 흰색으로 초기화
+
+	// 메모리 DC에 그리기
+	DrawImage(&memDC);
+
+	// 메모리 DC를 화면 DC에 고속 복사
+	pDC->BitBlt(0, 0, rect.Width(), rect.Height(), &memDC, 0, 0, SRCCOPY);
+
+	memDC.SelectObject(pOldBitmap);
+	memDC.DeleteDC();
+	bitmap.DeleteObject();
 }
 // CLogicGateView diagnostics
+
+/* 메모리 DC에 그리기 */
+void CLogicGateView::DrawImage(CDC *dc) {
+	nand.drawLogic(nand.logic, dc);
+}
 
 #ifdef _DEBUG
 void CLogicGateView::AssertValid() const
@@ -162,7 +193,7 @@ void CLogicGateView::OnMouseMove(UINT nFlags, CPoint point)
 		m_StartPos = point;
 		xor.SetPoint(xor.locateX + pos.x, xor.locateY + pos.y);
 		ReleaseCapture();
-		Invalidate();	
+		Invalidate(false);	
 	}
 
 //////////////////////////////////////////마우스를 움직여 선을 만듭니다 또는 연장하니다//////////////////////////
