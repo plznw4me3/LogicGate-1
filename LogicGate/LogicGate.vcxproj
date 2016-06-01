@@ -190,6 +190,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AND.h" />
+    <ClInclude Include="Clock.h" />
     <ClInclude Include="DPP.h" />
     <ClInclude Include="Gate.h" />
     <ClInclude Include="JKPP.h" />
@@ -211,6 +212,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AND.cpp" />
+    <ClCompile Include="Clock.cpp" />
     <ClCompile Include="DPP.cpp" />
     <ClCompile Include="Gate.cpp" />
     <ClCompile Include="JKPP.cpp" />
@@ -240,9 +242,13 @@
     <None Include="res\LogicGate.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="height_black.bmp" />
+    <Image Include="height_gray.bmp" />
     <Image Include="res\LogicGate.ico" />
     <Image Include="res\LogicGateDoc.ico" />
     <Image Include="res\Toolbar.bmp" />
+    <Image Include="width_black.bmp" />
+    <Image Include="width_gray.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

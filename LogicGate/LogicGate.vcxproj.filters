@@ -75,6 +75,9 @@
     <ClInclude Include="JKPP.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Clock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LogicGate.cpp">
@@ -128,6 +131,9 @@
     <ClCompile Include="JKPP.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Clock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="LogicGate.rc">
@@ -147,6 +153,18 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="res\Toolbar.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="height_black.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="height_gray.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="width_black.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="width_gray.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
