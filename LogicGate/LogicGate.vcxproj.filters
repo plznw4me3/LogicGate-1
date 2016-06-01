@@ -72,6 +72,9 @@
     <ClInclude Include="OR.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="JKPP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LogicGate.cpp">
@@ -120,6 +123,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="OR.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="JKPP.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

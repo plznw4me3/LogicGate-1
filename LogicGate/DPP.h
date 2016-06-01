@@ -8,7 +8,7 @@ public:
 		CPoint pos;		// Logic 위치
 		CPoint ch_pos[3];
 		int rotate;		// 회전
-		int input;		// 입력
+		int input;		// 입력 D
 		int clk;		// 클럭
 		int output1;	// 결과 Q
 		int output2;	// 결과 Q'

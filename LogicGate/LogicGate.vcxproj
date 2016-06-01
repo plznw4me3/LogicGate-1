@@ -192,6 +192,7 @@
     <ClInclude Include="AND.h" />
     <ClInclude Include="DPP.h" />
     <ClInclude Include="Gate.h" />
+    <ClInclude Include="JKPP.h" />
     <ClInclude Include="Line.h" />
     <ClInclude Include="LogicGate.h" />
     <ClInclude Include="LogicGateDoc.h" />
@@ -212,6 +213,7 @@
     <ClCompile Include="AND.cpp" />
     <ClCompile Include="DPP.cpp" />
     <ClCompile Include="Gate.cpp" />
+    <ClCompile Include="JKPP.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="LogicGate.cpp" />
     <ClCompile Include="LogicGateDoc.cpp" />

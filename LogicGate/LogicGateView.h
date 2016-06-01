@@ -5,7 +5,15 @@
 #pragma once
 #include <afxtempl.h>
 #include "Gate.h"
+#include "AND.h"
+#include "NAND.h"
+#include "OR.h"
+#include "NOR.h"
+#include "NOT.h"
 #include "XOR.h"
+#include "DPP.h"
+#include "TPP.h"
+#include "JKPP.h"
 #include "Wire.h"
 class CLogicGateView : public CView
 {
@@ -20,7 +28,15 @@ public:
 // Operations
 public:
 	//test 용입니다//
+	AND and;
+	NAND nand;
+	OR or ;
+	NOR nor;
+	NOT not;
 	XOR xor;
+	DPP dpp;
+	TPP tpp;
+	JKPP jkpp;
 	XOR *newXor;
 	CRect eraseRect;
 	CRect makelineRect;

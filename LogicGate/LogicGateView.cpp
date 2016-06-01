@@ -3,7 +3,16 @@
 //
 
 #include "stdafx.h"
+#include "Gate.h"
+#include "AND.h"
+#include "NAND.h"
+#include "OR.h"
+#include "NOR.h"
+#include "NOT.h"
 #include "XOR.h"
+#include "DPP.h"
+#include "TPP.h"
+#include "JKPP.h"
 #include "Wire.h"
 // SHARED_HANDLERS can be defined in an ATL project implementing preview, thumbnail
 // and search filter handlers and allows sharing of document code with that project.
@@ -37,13 +46,14 @@ CLogicGateView::CLogicGateView()
 {
 	// TODO: add construction code
 	//선이 저장될 CArray 을 만듭니다
+	/*
 	arrline.SetSize(10);
 	arrlineCount = 0;
 	wire = new Wire();
 	lineMoveFlag = false;
 	eraseRect.SetRect(0,400,100,500);
 	xorRect.SetRect(0,0,100,100);
-
+	*/
 }
 
 CLogicGateView::~CLogicGateView()
@@ -65,6 +75,7 @@ void CLogicGateView::OnDraw(CDC* pDC)
 		return;
 	// TODO: add draw code for native data here
 	/*Test 용입니다*/
+	/*
 	xor.DrawXOR(pDC, xor.locateX, xor.locateY);
 	testRect.SetRect(100, 100, 300, 300);
 	pDC->Rectangle(100, 100, 300, 300);
@@ -74,7 +85,9 @@ void CLogicGateView::OnDraw(CDC* pDC)
 	for (int i = 0; i <= arrlineCount; i++) {
 		arrline.GetAt(i).DrawLine(pDC);
 	}
-
+	*/
+	//CClientDC dc(this);
+	nand_logic.drawLogic(nand_logic.logic, pDC);
 }
 // CLogicGateView diagnostics
 
@@ -99,6 +112,8 @@ CLogicGateDoc* CLogicGateView::GetDocument() const // non-debug version is inlin
 void CLogicGateView::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	CClientDC cdc(this);	
+	nand.createLogic(nand.logic, point);
+	/*
 	// test용입니다 //	
 	if (xor.GetRect().PtInRect(point) == true) {
 		xor.MoveFlag = true;
@@ -131,6 +146,7 @@ void CLogicGateView::OnLButtonDown(UINT nFlags, CPoint point)
 ///////////////////////////////////////////////////////////////////////////////////
 	//마우스가 클릭되면 클릭된 영역이 이미 그려진 영역인지 아닌지 확인한다	
 	// TODO: Add your message handler code here and/or call defaulf
+	*/
 	CView::OnLButtonDown(nFlags, point);
 }
 
@@ -162,7 +178,8 @@ void CLogicGateView::OnMouseMove(UINT nFlags, CPoint point)
 		arrline.GetAt(changedLine).EndPos = preEndPos + pos;
 		Invalidate();
 	}
-
+	
+	
 	CView::OnMouseMove(nFlags, point);
 }
 
@@ -171,6 +188,7 @@ void CLogicGateView::OnMouseMove(UINT nFlags, CPoint point)
 void CLogicGateView::OnLButtonUp(UINT nFlags, CPoint point)
 {	// TODO: Add your message handler code here and/or call default
 	CClientDC cdc(this);
+	/*
 	xor.MoveFlag = false;
 	Wire testwire;
 	if (arrline.GetAt(arrlineCount).makeLineFlag) {
@@ -182,7 +200,7 @@ void CLogicGateView::OnLButtonUp(UINT nFlags, CPoint point)
 	}
 	else if (lineMoveFlag) {
 		lineMoveFlag = false;
-	}
+	}*/
 	CView::OnLButtonUp(nFlags, point);
 }
 
