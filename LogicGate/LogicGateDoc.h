@@ -15,11 +15,14 @@ protected: // create from serialization only
 
 // Attributes
 public:
-
+	CArray<INT, INT&> id;
+	CArray<POINT, POINT&> pos;
+	CArray<INT, INT&> r;
+	int cnt;
+	int logic_size;
 // Operations
 public:
-
-
+	
 // Overrides
 public:
 	virtual BOOL OnNewDocument();

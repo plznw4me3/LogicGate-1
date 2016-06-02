@@ -15,6 +15,7 @@
 #include "TPP.h"
 #include "JKPP.h"
 #include "Wire.h"
+#include "Clock.h"
 class CLogicGateView : public CView
 {
 protected: // create from serialization only
@@ -24,10 +25,17 @@ protected: // create from serialization only
 // Attributes
 public:
 	CLogicGateDoc* GetDocument() const;
+	//CMainFrame *pFrame = (CMainFrame*)AfxGetMainWnd();
+	//CLogicGateDoc *doc = (CLogicGateDoc*)pFrame->GetActiveDocument();
 	
 // Operations
 public:
 	//test 용입니다//
+	POINT logic_pos;
+	int rotate;
+	int id;
+	bool makeLogic;
+
 	AND and;
 	NAND nand;
 	OR or ;

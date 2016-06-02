@@ -14,12 +14,14 @@
 #include "TPP.h"
 #include "JKPP.h"
 #include "Wire.h"
+#include "Clock.h"
 // SHARED_HANDLERS can be defined in an ATL project implementing preview, thumbnail
 // and search filter handlers and allows sharing of document code with that project.
 #ifndef SHARED_HANDLERS
 #include "LogicGate.h"
 #endif
 
+#include "MainFrm.h"
 #include "LogicGateDoc.h"
 #include "LogicGateView.h"
 
@@ -31,7 +33,6 @@
 
 // CLogicGateView
 
-
 IMPLEMENT_DYNCREATE(CLogicGateView, CView)
 BEGIN_MESSAGE_MAP(CLogicGateView, CView)
 	ON_WM_LBUTTONDOWN()
@@ -42,6 +43,8 @@ END_MESSAGE_MAP()
 
 // CLogicGateView construction/destruction
 
+//CMainFrame *pFrame;
+//CLogicGateDoc *doc;
 CLogicGateView::CLogicGateView()
 {
 	// TODO: add construction code
@@ -54,6 +57,7 @@ CLogicGateView::CLogicGateView()
 	eraseRect.SetRect(0,400,100,500);
 	xorRect.SetRect(0,0,100,100);
 	*/
+	makeLogic = false;
 }
 
 CLogicGateView::~CLogicGateView()
@@ -69,10 +73,6 @@ BOOL CLogicGateView::PreCreateWindow(CREATESTRUCT& cs)
 // CLogicGateView drawing
 void CLogicGateView::OnDraw(CDC* pDC)
 {
-	CLogicGateDoc* pDoc = GetDocument();
-	ASSERT_VALID(pDoc);
-	if (!pDoc)
-		return;
 	// TODO: add draw code for native data here
 	/*Test 용입니다*/
 	/*
@@ -119,7 +119,43 @@ void CLogicGateView::OnDraw(CDC* pDC)
 
 /* 메모리 DC에 그리기 */
 void CLogicGateView::DrawImage(CDC *dc) {
+	CLogicGateDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+	if (!pDoc)
+		return;
+
+	int cnt = pDoc->logic_size;
+	int nand_cnt = 0;
+	dc->TextOutW(cnt, cnt, _T("ABC %d"), cnt);
+	/*while(cnt != 0) {
+		CPoint point;
+		point.x = pDoc->pos[pDoc->pos.GetSize() - cnt].x;
+		point.y = pDoc->pos[pDoc->pos.GetSize() - cnt].y;
+
+		dc->TextOutW(point.x, point.y, _T("QWE %d"), cnt);
+		dc->TextOutW(cnt, cnt, _T("ZXC %d"), cnt);
+		nand.createLogic(nand.logic, point);
+		//nand.logic[nand_cnt].rotate = pDoc->r[pDoc->pos.GetSize() - 1 - cnt];
+		cnt--;
+	}*/
+
+	if (makeLogic) {
+		pDoc->id.Add(id);
+		pDoc->pos.Add(logic_pos);
+		pDoc->r.Add(rotate);
+		pDoc->SetModifiedFlag();
+		makeLogic = false;
+	}
+	//pFrame = (CMainFrame*)AfxGetMainWnd();
+	//doc = (CLogicGateDoc*)pFrame->GetActiveDocument();
+	//CLogicGateDoc* pDoc = GetDocument();
+
 	nand.drawLogic(nand.logic, dc);
+	//if (doc->OnNewDocument()) {
+		//nand.logic.RemoveAll();
+	//}
+	//else {
+	//}
 }
 
 #ifdef _DEBUG
@@ -144,6 +180,21 @@ void CLogicGateView::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	CClientDC cdc(this);	
 	nand.createLogic(nand.logic, point);
+	id = 1;
+	pos = nand.logic[nand.logic.GetSize() - 1].pos;
+	rotate = nand.logic[nand.logic.GetSize() - 1].rotate;
+
+	makeLogic = true;
+
+
+	CLogicGateDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+	if (!pDoc)
+		return;
+
+	pDoc->pos.Add(point);
+	pDoc->r.Add(nand.logic[0].rotate);
+	pDoc->id.Add(id);
 	/*
 	// test용입니다 //	
 	if (xor.GetRect().PtInRect(point) == true) {
