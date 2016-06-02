@@ -40,6 +40,9 @@ BEGIN_MESSAGE_MAP(CLogicGateView, CView)
 	ON_WM_RBUTTONDOWN()
 	ON_WM_MOUSEMOVE()
 	ON_COMMAND(STOP_WATCH, &CLogicGateView::OnStopWatch)
+	ON_WM_CREATE()
+	ON_WM_DESTROY()
+	ON_WM_TIMER()
 END_MESSAGE_MAP()
 
 // CLogicGateView construction/destruction
@@ -59,6 +62,7 @@ CLogicGateView::CLogicGateView()
 	xorRect.SetRect(0,0,100,100);
 	*/
 	makeLogic = false;
+	sw_flag = false;
 }
 
 CLogicGateView::~CLogicGateView()
@@ -148,11 +152,14 @@ void CLogicGateView::DrawImage(CDC *dc) {
 		makeLogic = false;
 	}
 
-	if (sw_flag) {
+	if(sw_flag)
 		clk.DrawCLK(dc);
+	else
+	{
+		nand.drawLogic(nand.logic, dc);
 	}
 
-	nand.drawLogic(nand.logic, dc);
+	
 	//if (doc->OnNewDocument()) {
 		//nand.logic.RemoveAll();
 	//}
@@ -199,26 +206,28 @@ void CLogicGateView::OnLButtonDown(UINT nFlags, CPoint point)
 	pDoc->id.Add(id);
 
 	/* STOP WATCH */
-	if (clk.flag) {
-		int yn = MessageBox(L"디지털 클럭을 중지하시겠습니까?", NULL, MB_YESNO);
-		if (yn == IDYES) {			//중지클릭시
-			clk.flag = false;
-			KillTimer(0);
+	if(sw_flag){
+		if (clk.flag) {
+			int yn = MessageBox(L"디지털 클럭을 중지하시겠습니까?", NULL, MB_YESNO);
+			if (yn == IDYES) {			//중지클릭시
+				clk.flag = false;
+				KillTimer(0);
+			}
+			else {
+				clk.flag = true;
+			}
 		}
 		else {
-			clk.flag = true;
-		}
-	}
-	else {
-		int yn = MessageBox(L"디지털 클럭을 동작시키시겠습니까?", NULL, MB_YESNO);
-		if (yn == IDYES)
-		{
-			clk.flag = true;
-			SetTimer(0, 10, NULL);	//1ms마다 set
-			Invalidate(true);
-		}
-		else {
-			clk.flag = false;
+			int yn = MessageBox(L"디지털 클럭을 동작시키시겠습니까?", NULL, MB_YESNO);
+			if (yn == IDYES)
+			{
+				clk.flag = true;
+				SetTimer(0, 10, NULL);	//1ms마다 set
+				Invalidate(true);
+			}
+			else {
+				clk.flag = false;
+			}
 		}
 	}
 	/*
@@ -316,6 +325,8 @@ void CLogicGateView::OnLButtonUp(UINT nFlags, CPoint point)
 void CLogicGateView::OnRButtonDown(UINT nFlags, CPoint point){
 	// TODO: Add your message handler code here and/or call default
 	
+	if (!clk.flag)
+		clk.Reset();
 	
 	CView::OnRButtonDown(nFlags, point);
 }
@@ -349,5 +360,41 @@ void CLogicGateView::OnStopWatch()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 	sw_flag = true;
+	
 	clk.Reset();
+}
+
+
+int CLogicGateView::OnCreate(LPCREATESTRUCT lpCreateStruct)
+{
+	if (CView::OnCreate(lpCreateStruct) == -1)
+		return -1;
+
+	// TODO:  여기에 특수화된 작성 코드를 추가합니다.
+	SetTimer(0, 10, NULL);	// 10ms 단위
+	clk.flag = true;
+
+	return 0;
+}
+
+
+void CLogicGateView::OnDestroy()
+{
+	CView::OnDestroy();
+
+	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
+	clk.flag = false;
+	KillTimer(0);
+}
+
+
+void CLogicGateView::OnTimer(UINT_PTR nIDEvent)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	clk.flag = true;
+	clk.IncCLK();
+	clk.StopWatch(clk.clk_sec, clk.clk_ms);
+	Invalidate(false);
+
+	CView::OnTimer(nIDEvent);
 }

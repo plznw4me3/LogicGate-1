@@ -66,7 +66,17 @@ BOOL CLogicGateDoc::OnNewDocument()
 	
 	POSITION ppos = GetFirstViewPosition();
 	CLogicGateView *pView = (CLogicGateView *)GetNextView(ppos);
+	pView->and.logic.RemoveAll();
 	pView->nand.logic.RemoveAll();
+	pView->or.logic.RemoveAll();
+	pView->not.logic.RemoveAll();
+	//pView->nor.logic.RemoveAll();
+	//pView->xor.logic.RemoveAll();
+	pView->dpp.logic.RemoveAll();
+	pView->tpp.logic.RemoveAll();
+	pView->jkpp.logic.RemoveAll();
+	pView->sw_flag = false;
+	pView->makeLogic = false;
 
 	//CLogicGateView *pView = (CLogicGateView *)((CMainFrame *)(AfxGetApp()->m_pMainWnd))->GetActiveView();
 	return TRUE;

@@ -160,9 +160,9 @@ BEGIN
     BEGIN
         MENUITEM "&About LogicGate...",         ID_APP_ABOUT
     END
-    POPUP "?????"
+    POPUP "&Simulation"
     BEGIN
-        MENUITEM "?? ??",                       STOP_WATCH
+        MENUITEM "&Stop Watch\tCtrl+S",         STOP_WATCH
     END
 END
 
