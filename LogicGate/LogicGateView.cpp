@@ -39,6 +39,7 @@ BEGIN_MESSAGE_MAP(CLogicGateView, CView)
 	ON_WM_LBUTTONUP()
 	ON_WM_RBUTTONDOWN()
 	ON_WM_MOUSEMOVE()
+	ON_COMMAND(STOP_WATCH, &CLogicGateView::OnStopWatch)
 END_MESSAGE_MAP()
 
 // CLogicGateView construction/destruction
@@ -146,9 +147,10 @@ void CLogicGateView::DrawImage(CDC *dc) {
 		pDoc->SetModifiedFlag();
 		makeLogic = false;
 	}
-	//pFrame = (CMainFrame*)AfxGetMainWnd();
-	//doc = (CLogicGateDoc*)pFrame->GetActiveDocument();
-	//CLogicGateDoc* pDoc = GetDocument();
+
+	if (sw_flag) {
+		clk.DrawCLK(dc);
+	}
 
 	nand.drawLogic(nand.logic, dc);
 	//if (doc->OnNewDocument()) {
@@ -195,6 +197,30 @@ void CLogicGateView::OnLButtonDown(UINT nFlags, CPoint point)
 	pDoc->pos.Add(point);
 	pDoc->r.Add(nand.logic[0].rotate);
 	pDoc->id.Add(id);
+
+	/* STOP WATCH */
+	if (clk.flag) {
+		int yn = MessageBox(L"디지털 클럭을 중지하시겠습니까?", NULL, MB_YESNO);
+		if (yn == IDYES) {			//중지클릭시
+			clk.flag = false;
+			KillTimer(0);
+		}
+		else {
+			clk.flag = true;
+		}
+	}
+	else {
+		int yn = MessageBox(L"디지털 클럭을 동작시키시겠습니까?", NULL, MB_YESNO);
+		if (yn == IDYES)
+		{
+			clk.flag = true;
+			SetTimer(0, 10, NULL);	//1ms마다 set
+			Invalidate(true);
+		}
+		else {
+			clk.flag = false;
+		}
+	}
 	/*
 	// test용입니다 //	
 	if (xor.GetRect().PtInRect(point) == true) {
@@ -317,4 +343,11 @@ void CLogicGateView::LBtnClickedCheck(CPoint point){
 
 	}
 ///////////////////////////////////////////////////////////////////////////////
+}
+
+void CLogicGateView::OnStopWatch()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	sw_flag = true;
+	clk.Reset();
 }

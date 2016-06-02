@@ -36,6 +36,8 @@ public:
 	int id;
 	bool makeLogic;
 
+	bool sw_flag;
+
 	AND and;
 	NAND nand;
 	OR or ;
@@ -49,6 +51,8 @@ public:
 	CRect eraseRect;
 	CRect makelineRect;
 	CRect xorRect;
+
+	Clock clk;
 	////////////////
 	
 
@@ -105,6 +109,7 @@ public:
 	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
 	afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
+	afx_msg void OnStopWatch();
 };
 
 #ifndef _DEBUG  // debug version in LogicGateView.cpp
