@@ -4,6 +4,7 @@
 
 #include "stdafx.h"
 #include "Gate.h"
+#include "INPUT_btn.h"
 #include "AND.h"
 #include "NAND.h"
 #include "OR.h"
@@ -157,6 +158,7 @@ void CLogicGateView::DrawImage(CDC *dc) {
 	else
 	{
 		nand.drawLogic(nand.logic, dc);
+		input_btn.drawLogic(input_btn.logic, dc);
 	}
 
 	
@@ -188,6 +190,7 @@ CLogicGateDoc* CLogicGateView::GetDocument() const // non-debug version is inlin
 void CLogicGateView::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	CClientDC cdc(this);	
+	/*
 	nand.createLogic(nand.logic, point);
 	id = 1;
 	pos = nand.logic[nand.logic.GetSize() - 1].pos;
@@ -204,6 +207,8 @@ void CLogicGateView::OnLButtonDown(UINT nFlags, CPoint point)
 	pDoc->pos.Add(point);
 	pDoc->r.Add(nand.logic[0].rotate);
 	pDoc->id.Add(id);
+	*/
+	input_btn.createLogic(input_btn.logic, point);
 
 	/* STOP WATCH */
 	if(sw_flag){
