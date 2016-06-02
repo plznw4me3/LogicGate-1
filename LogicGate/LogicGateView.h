@@ -31,6 +31,8 @@ public:
 // Operations
 public:
 	//test 용입니다//
+	enum TIME { Hz_1, Hz_10, stop_watch };
+
 	POINT logic_pos;
 	int rotate;
 	int id;

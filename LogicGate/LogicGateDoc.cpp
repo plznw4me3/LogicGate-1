@@ -60,10 +60,11 @@ BOOL CLogicGateDoc::OnNewDocument()
 	// (SDI documents will reuse this document)
 	id.RemoveAll();
 	pos.RemoveAll();
-	r.RemoveAll();
-	cnt = 0;
+	rotate.RemoveAll();
+	cnt = 100;
 	logic_size = 0;
 	
+	// View에 있던 정보 초기화
 	POSITION ppos = GetFirstViewPosition();
 	CLogicGateView *pView = (CLogicGateView *)GetNextView(ppos);
 	pView->and.logic.RemoveAll();
@@ -95,25 +96,26 @@ void CLogicGateDoc::Serialize(CArchive& ar)
 	if (ar.IsStoring())
 	{
 		// TODO: add storing code here
-		id.Serialize(ar);
-		pos.Serialize(ar);
-		r.Serialize(ar);
+		for (int i = 0; i < id.GetSize(); i++) {
+			CString str;
+			str.Format(_T("%d %d %d %d "), id[i], pos[i].x, pos[i].y, rotate[i]);
+			ar << id[i] << pos[i].x << pos[i].y << rotate[i];
+			//ar << str;
+		}
+		//id.Serialize(ar);
+		//pos.Serialize(ar);
+		//r.Serialize(ar);
 
 	}
 	else
 	{
 		// TODO: add loading code here
-		id.Serialize(ar);
-		pos.Serialize(ar);
-		r.Serialize(ar); 
-
-		
-		//CPoint point;
-		//point.x = pos[cnt].x;
-		//point.y = pos[cnt].y;
-		//cnt++;
-		//pView->nand.createLogic(pView->nand.logic, point);
-		//pView->Invalidate();
+		int d, x, y, r;
+		CString str;
+		//while (1) {
+		ar >> str;
+			
+		//}
 	}
 	logic_size++;
 }

@@ -132,7 +132,7 @@ void INPUT_btn::drawLogic(CArray<InputLogic, InputLogic&>& logic, CDC * dc) {
 }
 
 /* input 입력 */
-void INPUT_btn::setValue(CArray<InputLogic, InputtLogic&>& logic, int input, POINT point)
+void INPUT_btn::setValue(CArray<InputLogic, InputLogic&>& logic, int input, POINT point)
 {	// 해당 point값에 마지막 선이 연결된 경우 해당 input값 입력
 	for (int i = 0; i < logic.GetSize(); i++) {
 		CString x, y;

@@ -129,9 +129,9 @@ void CLogicGateView::DrawImage(CDC *dc) {
 	if (!pDoc)
 		return;
 
-	int cnt = pDoc->logic_size;
+	int cnt = pDoc->cnt;
 	int nand_cnt = 0;
-	dc->TextOutW(cnt, cnt, _T("ABC %d"), cnt);
+	dc->TextOutW(pDoc->pos.GetSize(), pDoc->pos.GetSize(), CString(_T("ABC %d"), pDoc->pos.GetSize()));
 	/*while(cnt != 0) {
 		CPoint point;
 		point.x = pDoc->pos[pDoc->pos.GetSize() - cnt].x;
@@ -145,10 +145,10 @@ void CLogicGateView::DrawImage(CDC *dc) {
 	}*/
 
 	if (makeLogic) {
-		pDoc->id.Add(id);
-		pDoc->pos.Add(logic_pos);
-		pDoc->r.Add(rotate);
-		pDoc->SetModifiedFlag();
+		//pDoc->id.Add(id);
+		//pDoc->pos.Add(logic_pos);
+		//pDoc->r.Add(rotate);
+		//pDoc->SetModifiedFlag();
 		makeLogic = false;
 	}
 
@@ -187,23 +187,27 @@ CLogicGateDoc* CLogicGateView::GetDocument() const // non-debug version is inlin
 // CLogicGateView message handlers
 void CLogicGateView::OnLButtonDown(UINT nFlags, CPoint point)
 {
-	CClientDC cdc(this);	
-	nand.createLogic(nand.logic, point);
-	id = 1;
-	pos = nand.logic[nand.logic.GetSize() - 1].pos;
-	rotate = nand.logic[nand.logic.GetSize() - 1].rotate;
-
-	makeLogic = true;
-
+	CClientDC cdc(this);
 
 	CLogicGateDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
 	if (!pDoc)
 		return;
 
-	pDoc->pos.Add(point);
-	pDoc->r.Add(nand.logic[0].rotate);
-	pDoc->id.Add(id);
+	if (nand.makeOK(nand.logic, point)) {
+		nand.createLogic(nand.logic, point);
+		id = 1;
+		pos = nand.logic[nand.logic.GetSize() - 1].pos;
+		rotate = nand.logic[nand.logic.GetSize() - 1].rotate;
+		pDoc->pos.Add(point);
+		pDoc->rotate.Add(nand.logic[0].rotate);
+		pDoc->id.Add(id);
+	}
+
+	makeLogic = true;
+
+
+
 
 	/* STOP WATCH */
 	if(sw_flag){
@@ -211,7 +215,7 @@ void CLogicGateView::OnLButtonDown(UINT nFlags, CPoint point)
 			int yn = MessageBox(L"디지털 클럭을 중지하시겠습니까?", NULL, MB_YESNO);
 			if (yn == IDYES) {			//중지클릭시
 				clk.flag = false;
-				KillTimer(0);
+				KillTimer(stop_watch);
 			}
 			else {
 				clk.flag = true;
@@ -222,7 +226,7 @@ void CLogicGateView::OnLButtonDown(UINT nFlags, CPoint point)
 			if (yn == IDYES)
 			{
 				clk.flag = true;
-				SetTimer(0, 10, NULL);	//1ms마다 set
+				SetTimer(stop_watch, 10, NULL);	//10ms마다 set
 				Invalidate(true);
 			}
 			else {
@@ -230,6 +234,7 @@ void CLogicGateView::OnLButtonDown(UINT nFlags, CPoint point)
 			}
 		}
 	}
+	pDoc->cnt++;
 	/*
 	// test용입니다 //	
 	if (xor.GetRect().PtInRect(point) == true) {
@@ -293,10 +298,18 @@ void CLogicGateView::OnMouseMove(UINT nFlags, CPoint point)
 		CPoint preEndPos = arrline.GetAt(changedLine).EndPos;
 		arrline.GetAt(changedLine).StartPos = preStartPos + pos;
 		arrline.GetAt(changedLine).EndPos = preEndPos + pos;
-		Invalidate();
+		Invalidate(false);
 	}
-	
-	
+
+	/* Test용 지울것!! */
+	CLogicGateDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+	if (!pDoc)
+		return;
+	CString str;
+	//str.Format(_T("%d %d"), pDoc->pos[0].x, pDoc->pos[0].y);
+	str.Format(_T("%d %d"), pDoc->rotate.GetSize(), pDoc->cnt);
+	cdc.TextOutW(point.x, point.y, str);
 	CView::OnMouseMove(nFlags, point);
 }
 
@@ -371,7 +384,6 @@ int CLogicGateView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		return -1;
 
 	// TODO:  여기에 특수화된 작성 코드를 추가합니다.
-	SetTimer(0, 10, NULL);	// 10ms 단위
 	clk.flag = true;
 
 	return 0;
@@ -384,7 +396,7 @@ void CLogicGateView::OnDestroy()
 
 	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
 	clk.flag = false;
-	KillTimer(0);
+	KillTimer(stop_watch);
 }
 
 

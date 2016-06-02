@@ -17,7 +17,7 @@ protected: // create from serialization only
 public:
 	CArray<INT, INT&> id;
 	CArray<POINT, POINT&> pos;
-	CArray<INT, INT&> r;
+	CArray<INT, INT&> rotate;
 	int cnt;
 	int logic_size;
 // Operations
