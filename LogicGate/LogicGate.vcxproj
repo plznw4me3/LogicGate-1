@@ -193,6 +193,7 @@
     <ClInclude Include="Clock.h" />
     <ClInclude Include="DPP.h" />
     <ClInclude Include="Gate.h" />
+    <ClInclude Include="INPUT_btn.h" />
     <ClInclude Include="JKPP.h" />
     <ClInclude Include="Line.h" />
     <ClInclude Include="LogicGate.h" />
@@ -215,6 +216,7 @@
     <ClCompile Include="Clock.cpp" />
     <ClCompile Include="DPP.cpp" />
     <ClCompile Include="Gate.cpp" />
+    <ClCompile Include="INPUT_btn.cpp" />
     <ClCompile Include="JKPP.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="LogicGate.cpp" />
