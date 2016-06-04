@@ -86,60 +86,64 @@ void INPUT_btn::rotateLogic(CArray<InputLogic, InputLogic&> &logic, CPoint point
 
 // Logic 그리기
 void INPUT_btn::drawLogic(CArray<InputLogic, InputLogic&>& logic, CDC * dc) {
+
 	for (int i = 0; i < logic.GetSize(); i++) {
-		POINT pt[3];
-		POINT pt_e[2];
 		int x = logic[i].pos.x;
 		int y = logic[i].pos.y;
 		int r = logic[i].rotate;
+		POINT pt[3];
+		CRect rect;
+
+		dc->Rectangle(x, y, x + 30, y + 30);
 
 		switch (logic[i].rotate) {
 		case 0:
-			pt[0] = { x, y };
-			pt[1] = { x + 30, y + 30 };
-			pt[2] = { x, y + 60 };
-			pt_e[0] = { x + 30, y + 26 };
-			pt_e[1] = { x + 40, y + 36 };
+			pt[0] = { x + 30, y + 15 };
+			pt[1] = { x + 45, y + 15 };
+			dc->Polygon(pt, 2);
+			dc->TextOutW(x - 17, y + 7, CString(_T("IN")));
 			break;
 		case 1:
-			pt[0] = { x, y };
-			pt[1] = { x + 30, y + 30 };
-			pt[2] = { x + 60, y };
-			pt_e[0] = { x + 26, y + 30 };
-			pt_e[1] = { x + 36, y + 40 };
+			pt[0] = { x + 15, y };
+			pt[1] = { x + 15, y - 15 };
+			dc->Polygon(pt, 2);
+			dc->TextOutW(x + 7, y + 32, CString(_T("IN")));
 			break;
 		case 2:
-			pt[0] = { x + 40, y };
-			pt[1] = { x + 10, y + 30 };
-			pt[2] = { x + 40, y + 60 };
-			pt_e[0] = { x, y + 26 };
-			pt_e[1] = { x + 10, y + 36 };
+			pt[0] = { x , y + 15 };
+			pt[1] = { x - 15, y + 15 };
+			dc->Polygon(pt, 2);
+			dc->TextOutW(x + 32, y + 7, CString(_T("IN")));
 			break;
 		case 3:
-			pt[0] = { x, y + 40 };
-			pt[1] = { x + 30, y + 10 };
-			pt[2] = { x + 60, y + 40 };
-			pt_e[0] = { x + 26, y };
-			pt_e[1] = { x + 36, y + 10 };
+			pt[0] = { x + 15, y + 30 };
+			pt[1] = { x + 15, y + 45 };
+			dc->Polygon(pt, 2);
+			dc->TextOutW(x + 7, y - 17, CString(_T("IN")));
 			break;
 		default:
 			break;
 		}
-
-		dc->Polygon(pt, 3);
-		dc->Ellipse(pt_e[0].x, pt_e[0].y, pt_e[1].x, pt_e[1].y);
+		CString str;
+		str.Format(_T("%d"), logic[i].input);
+		dc->TextOutW(logic[i].pos.x + 10, logic[i].pos.y + 7, str);
 	}
 }
 
 /* input 입력 */
 void INPUT_btn::setValue(CArray<InputLogic, InputLogic&>& logic, int input, POINT point)
 {	// 해당 point값에 마지막 선이 연결된 경우 해당 input값 입력
+	CRgn input_rgn;
+	input_rgn.CreateRectRgn(point.x, point.y, point.x + 30, point.y + 30);
+
 	for (int i = 0; i < logic.GetSize(); i++) {
-		CString x, y;
-		x.Format(_T("%d"), logic[i].in_line->GetAt(logic[i].in_line->GetSize() - 1).x);
-		y.Format(_T("%d"), logic[i].in_line->GetAt(logic[i].in_line->GetSize() - 1).y);
-		if ((_ttoi(x) == point.x) && (_ttoi(y) == point.y)) {
-			logic[i].input = input;
+		input_rgn.SetRectRgn(logic[i].pos.x, logic[i].pos.y, logic[i].pos.x + 30, logic[i].pos.y + 30);
+		if (input_rgn.PtInRegion(point)) {
+			if (logic[i].input == 0)
+				logic[i].input = 1;
+			else
+				logic[i].input = 0;
+
 		}
 	}
 }

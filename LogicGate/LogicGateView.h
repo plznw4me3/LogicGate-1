@@ -5,6 +5,7 @@
 #pragma once
 #include <afxtempl.h>
 #include "Gate.h"
+#include "INPUT_btn.h"
 #include "AND.h"
 #include "NAND.h"
 #include "OR.h"
@@ -39,6 +40,8 @@ public:
 	bool makeLogic;
 
 	bool sw_flag;
+
+	INPUT_btn input_btn;
 
 	AND and;
 	NAND nand;
