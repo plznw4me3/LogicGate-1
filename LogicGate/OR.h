@@ -5,10 +5,14 @@ class OR {
 public:
 	typedef struct OrLogic {
 		CPoint pos;		// Logic 위치
+		int id;			// id
 		int rotate;		// 회전
 		int input1;		// 입력1
 		int input2;		// 입력2
 		int output;		// 출력
+		bool input1_flag;	// 입력1 연결 유무
+		bool input2_flag;	// 입력2 연결 유무
+		bool output_flag;	// 출력 연결 유무
 		CArray<POINT, POINT&> *in_line1;
 		CArray<POINT, POINT&> *in_line2;
 		bool drawing;	// 그리는 중인가?

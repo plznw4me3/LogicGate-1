@@ -8,10 +8,14 @@ void OR::createLogic(CArray<OrLogic, OrLogic&> &logic, CPoint point)
 
 	if (logic.GetSize() == 0) {	// 처음 Logic 만들기
 		temp.pos = point;
+		temp.id = 2000 + logic.GetSize();
 		temp.input1 = 2;
 		temp.input2 = 2;
 		temp.output = 2;
 		temp.rotate = 0;
+		temp.input1_flag = false;
+		temp.input2_flag = false;
+		temp.output_flag = false;
 		temp.in_line1 = new CArray<POINT, POINT&>;
 		temp.in_line2 = new CArray<POINT, POINT&>;
 		temp.drawing = false;
@@ -21,10 +25,14 @@ void OR::createLogic(CArray<OrLogic, OrLogic&> &logic, CPoint point)
 	else {	// 두 번째 이후 Logic 만들기
 		if (makeOK(logic, point)) {
 			temp.pos = point;
+			temp.id = 2000 + logic.GetSize();
 			temp.input1 = 2;
 			temp.input2 = 2;
 			temp.output = 2;
 			temp.rotate = 0;
+			temp.input1_flag = false;
+			temp.input2_flag = false;
+			temp.output_flag = false;
 			temp.in_line1 = new CArray<POINT, POINT&>;
 			temp.in_line2 = new CArray<POINT, POINT&>;
 			temp.drawing = false;
@@ -84,6 +92,9 @@ void OR::rotateLogic(CArray<OrLogic, OrLogic&> &logic, CPoint point)
 			logic[i].input1 = 2;
 			logic[i].input2 = 2;
 			logic[i].output = 2;
+			logic[i].input1_flag = false;
+			logic[i].input2_flag = false;
+			logic[i].output_flag = false;
 		}
 	}
 }

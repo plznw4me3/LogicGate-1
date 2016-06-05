@@ -231,7 +231,7 @@ void CLogicGateView::OnLButtonDown(UINT nFlags, CPoint point)
 			}
 		}
 	}
-	pDoc->cnt++;
+	//pDoc->cnt++;
 	/*
 	// test용입니다 //	
 	if (xor.GetRect().PtInRect(point) == true) {

@@ -7,11 +7,15 @@ public:
 	typedef struct TppLogic {
 		CPoint pos;		// Logic 위치
 		CPoint ch_pos[3];
+		int id;			// id
 		int rotate;		// 회전
 		int input;		// 입력 T
 		int clk;		// 클럭
 		int output1;	// 결과 Q
 		int output2;	// 결과 Q'
+		bool input_flag;	// 입력 T 연결 유무
+		bool output1_flag;	// 출력 Q 연결 유무
+		bool output2_flag;	// 출력 Q' 연결 유무
 		CArray<POINT, POINT&> *in_line;
 		bool drawing;	// 그리는 중인가?
 		bool updown;	// 상승/하강 엣지

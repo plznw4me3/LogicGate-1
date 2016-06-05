@@ -7,12 +7,17 @@ public:
 	typedef struct JKppLogic {
 		CPoint pos;		// Logic 위치
 		CPoint ch_pos[4];
+		int id;			// id
 		int rotate;		// 회전
 		int input1;		// 입력1 J
 		int input2;		// 입력2 K
 		int clk;		// 클럭
 		int output1;	// 결과 Q
 		int output2;	// 결과 Q'
+		bool input1_flag;	// 입력 J 연결 유무
+		bool input2_flag;	// 입력 K 연결 유무
+		bool output1_flag;	// 출력 Q 연결 유무
+		bool output2_flag;	// 출력 Q' 연결 유무
 		CArray<POINT, POINT&> *in_line;
 		bool drawing;	// 그리는 중인가?
 		bool updown;	// 상승/하강 엣지

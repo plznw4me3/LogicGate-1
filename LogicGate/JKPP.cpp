@@ -8,12 +8,17 @@ void JKPP::createLogic(CArray<JKppLogic, JKppLogic&> &logic, CPoint point)
 
 	if (logic.GetSize() == 0) {	// 처음 Logic 만들기
 		temp.pos = point;
+		temp.id = 8000 + logic.GetSize();
 		temp.input1 = 2;
 		temp.input2 = 2;
 		temp.clk = 2;
 		temp.output1 = 0;
 		temp.output2 = 1;
 		temp.rotate = 0;
+		temp.input1_flag = false;
+		temp.input2_flag = false;
+		temp.output1_flag = false;
+		temp.output2_flag = false;
 		temp.ch_pos[0] = { point.x, point.y };
 		temp.ch_pos[1] = { point.x + 40, point.y };
 		temp.ch_pos[2] = { point.x + 40, point.y + 40 };
@@ -25,12 +30,17 @@ void JKPP::createLogic(CArray<JKppLogic, JKppLogic&> &logic, CPoint point)
 	else {	// 두 번째 이후 Logic 만들기
 		if (makeOK(logic, point)) {
 			temp.pos = point;
+			temp.id = 8000 + logic.GetSize();
 			temp.input1 = 2;
 			temp.input2 = 2;
 			temp.clk = 2;
 			temp.output1 = 0;
 			temp.output2 = 1;
 			temp.rotate = 0;
+			temp.input1_flag = false;
+			temp.input2_flag = false;
+			temp.output1_flag = false;
+			temp.output2_flag = false;
 			temp.ch_pos[0] = { point.x, point.y };
 			temp.ch_pos[1] = { point.x + 40, point.y };
 			temp.ch_pos[2] = { point.x + 40, point.y + 40 };
@@ -94,6 +104,10 @@ void JKPP::rotateLogic(CArray<JKppLogic, JKppLogic&> &logic, CPoint point)
 			logic[i].clk = 2;
 			logic[i].output1 = 0;
 			logic[i].output2 = 1;
+			logic[i].input1_flag = false;
+			logic[i].input2_flag = false;
+			logic[i].output1_flag = false;
+			logic[i].output2_flag = false;
 		}
 	}
 }

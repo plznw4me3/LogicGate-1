@@ -8,10 +8,14 @@ void DPP::createLogic(CArray<DppLogic, DppLogic&> &logic, CPoint point)
 
 	if (logic.GetSize() == 0) {	// 처음 Logic 만들기
 		temp.pos = point;
+		temp.id = 7000 + logic.GetSize();
 		temp.input = 2;
 		temp.output1 = 0;
 		temp.output2 = 1;
 		temp.rotate = 0;
+		temp.input_flag = false;
+		temp.output1_flag = false;
+		temp.output2_flag = false;
 		temp.ch_pos[0] = { point.x, point.y };
 		temp.ch_pos[1] = { point.x + 40, point.y };
 		temp.ch_pos[2] = { point.x + 40, point.y + 40 };
@@ -23,6 +27,7 @@ void DPP::createLogic(CArray<DppLogic, DppLogic&> &logic, CPoint point)
 	else {	// 두 번째 이후 Logic 만들기
 		if (makeOK(logic, point)) {
 			temp.pos = point;
+			temp.id = 7000 + logic.GetSize();
 			temp.input = 2;
 			temp.output1 = 0;
 			temp.output2 = 1;
@@ -88,6 +93,9 @@ void DPP::rotateLogic(CArray<DppLogic, DppLogic&> &logic, CPoint point)
 			logic[i].input = 2;
 			logic[i].output1 = 0;
 			logic[i].output2 = 1;
+			logic[i].input_flag = false;
+			logic[i].output1_flag = false;
+			logic[i].output2_flag = false;
 		}
 	}
 }

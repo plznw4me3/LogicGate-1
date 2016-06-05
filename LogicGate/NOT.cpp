@@ -8,9 +8,12 @@ void NOT::createLogic(CArray<NotLogic, NotLogic&> &logic, CPoint point)
 
 	if (logic.GetSize() == 0) {	// 처음 Logic 만들기
 		temp.pos = point;
+		temp.id = 3000 + logic.GetSize();
 		temp.input = 2;
 		temp.output = 2;
 		temp.rotate = 0;
+		temp.input_flag = false;
+		temp.output_flag = false;
 		temp.in_line = new CArray<POINT, POINT&>;
 		temp.drawing = false;
 
@@ -19,9 +22,12 @@ void NOT::createLogic(CArray<NotLogic, NotLogic&> &logic, CPoint point)
 	else {	// 두 번째 이후 Logic 만들기
 		if (makeOK(logic, point)) {
 			temp.pos = point;
+			temp.id = 3000 + logic.GetSize();
 			temp.input = 2;
 			temp.output = 2;
 			temp.rotate = 0;
+			temp.input_flag = false;
+			temp.output_flag = false;
 			temp.in_line = new CArray<POINT, POINT&>;
 			temp.drawing = false;
 
@@ -79,6 +85,8 @@ void NOT::rotateLogic(CArray<NotLogic, NotLogic&> &logic, CPoint point)
 			logic[i].in_line->RemoveAll();
 			logic[i].input = 2;
 			logic[i].output = 2;
+			logic[i].input_flag = false;
+			logic[i].output_flag = false;
 		}
 	}
 }

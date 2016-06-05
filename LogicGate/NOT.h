@@ -5,9 +5,12 @@ class NOT {
 public:
 	typedef struct NotLogic {
 		CPoint pos;		// Logic 위치
+		int id;			// id
 		int rotate;		// 회전
 		int input;		// 입력
 		int output;		// 출력
+		bool input_flag;		// 입력1 연결 유무
+		bool output_flag;	// 출력 연결 유무
 		CArray<POINT, POINT&> *in_line;
 		bool drawing;	// 그리는 중인가?
 	};

@@ -6,6 +6,7 @@ public:
 		CPoint pos;
 		int rotate;
 		int input;
+		bool input_flag;	// 입력 연결 유무
 	};
 	CArray<InputLogic, InputLogic&> logic;
 
